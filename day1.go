@@ -25,8 +25,12 @@ func main() {
 	for scanner.Scan() {
 
 		number, err := strconv.Atoi((scanner.Text()[1:]))
+		originalDial := dial
 
-		number = number % 100
+		if number >= 100 {
+			password += number / 100
+			number = number % 100
+		}
 
 		if err != nil {
 			log.Fatalf("error %s", err)
@@ -35,12 +39,12 @@ func main() {
 		if strings.HasPrefix(scanner.Text(), "L") {
 
 			dial -= number
-			if dial == 0 {
-				password++
-			}
 
 			if dial < 0 {
 				dial += 100
+				if dial > 0 && originalDial != 0 {
+					password++
+				}
 			}
 
 		}
@@ -51,14 +55,15 @@ func main() {
 
 			if dial > 99 {
 				dial -= 100
+				if dial > 0 {
+					password++
+				}
 			}
-
-			if dial == 0 {
-				password++
-			}
-
 		}
 
+		if dial == 0 {
+			password++
+		}
 	}
 
 	fmt.Println("Password", password)
