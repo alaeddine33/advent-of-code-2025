@@ -1,4 +1,4 @@
-package main
+package adventofcode2025
 
 import (
 	"bufio"
@@ -9,11 +9,13 @@ import (
 	"strings"
 )
 
-func main() {
+func Day1() {
+
+	fmt.Println("----------------DAY 1-----------------")
 
 	var password, dial int = 0, 50
 
-	file, err := os.Open("day1-input")
+	file, err := os.Open("./inputs/day1.txt")
 	if err != nil {
 		log.Fatalf("error %s", err)
 	}
