@@ -83,7 +83,6 @@ func Day2() {
 
 	var sum int = 0
 	for _, id := range invalidIDs {
-		fmt.Println(id)
 		sum += id
 	}
 
